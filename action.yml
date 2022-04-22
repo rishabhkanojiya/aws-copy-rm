@@ -1,0 +1,9 @@
+name: "S3 Copy and Remove"
+description: "Backing up (Copy) and removing files in AWS S3 repository"
+author: rishabhkanojiya
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: copy
+  color: green
