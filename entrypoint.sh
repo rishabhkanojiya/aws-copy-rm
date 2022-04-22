@@ -31,13 +31,6 @@ ${AWS_REGION}
 text
 EOF
 
-echo -e "\n-----Backing Up Files-------\n"
-
-sh -c "aws s3 sync s3://${AWS_S3_BUCKET}/${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR:-./backup}/$(date +%Y-%m-%d:%H-%M) \
-              --exclude '*' --include 'js/*' --include 'asset-manifest.json' \
-              --include 'static/*' --include 'css/*' --include 'translations/*' \
-              --profile s3-copy-rm-profile \
-              --no-progress"
 
 echo -e "\n-----Removing Files-------\n"
 
