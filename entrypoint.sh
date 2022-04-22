@@ -39,11 +39,6 @@ sh -c "aws s3 sync s3://${AWS_S3_BUCKET}/${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/
               --profile s3-copy-rm-profile \
               --no-progress"
 
-echo -e "\n-----Removing Files-------\n"
-
-sh -c "aws s3 rm s3://${AWS_S3_BUCKET}/${SOURCE_DIR:-.} --exclude '*' \
-              --include 'js/*' --include 'static/*' --recursive \
-              --profile s3-copy-rm-profile"
 
 aws configure --profile s3-copy-rm-profile <<-EOF >/dev/null 2>&1
 null
