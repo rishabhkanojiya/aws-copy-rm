@@ -34,7 +34,7 @@ EOF
 echo -e "\n-----Copying Files-------\n"
 
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
-              --profile s3-sync-action \
+              --profile s3-copy-rm-profile \
               --no-progress"
 
 aws configure --profile s3-copy-rm-profile <<-EOF >/dev/null 2>&1
