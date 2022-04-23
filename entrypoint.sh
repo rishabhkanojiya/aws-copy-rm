@@ -33,19 +33,19 @@ EOF
 
 echo -e "\n-----Backing Up Files-------\n"
 echo "SOURCE_DIR_BACKUP"
-echo SOURCE_DIR_BACKUP
+echo $SOURCE_DIR_BACKUP
 
 echo "DEST_DIR_BACKUP"
-echo DEST_DIR_BACKUP
+echo $DEST_DIR_BACKUP
 
 echo "SOURCE_DIR_BACKUP"
-echo SOURCE_DIR_BACKUP
+echo $SOURCE_DIR_BACKUP
 
 echo "SOURCE_DIR_COPY"
-echo SOURCE_DIR_COPY
+echo $SOURCE_DIR_COPY
 
 echo "DEST_DIR_COPY"
-echo DEST_DIR_COPY
+echo $DEST_DIR_COPY
 
 # sh -c "aws s3 sync s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR_BACKUP:-./backup}/$(date +%Y-%m-%d:%H-%M) \
 #               --exclude '*' --include 'js/*' --include 'asset-manifest.json' \
