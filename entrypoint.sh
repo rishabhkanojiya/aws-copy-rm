@@ -32,39 +32,25 @@ text
 EOF
 
 echo -e "\n-----Backing Up Files-------\n"
-echo "SOURCE_DIR_BACKUP"
-echo $SOURCE_DIR_BACKUP
 
-echo "DEST_DIR_BACKUP"
-echo $DEST_DIR_BACKUP
+sh -c "aws s3 sync s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR_BACKUP:-./backup}/$(date +%Y-%m-%d:%H-%M) \
+              --exclude '*' --include 'js/*' --include 'asset-manifest.json' \
+              --include 'static/*' --include 'css/*' --include 'translations/*' \
+              --profile s3-copy-rm-profile \
+              --no-progress"
 
-echo "SOURCE_DIR_BACKUP"
-echo $SOURCE_DIR_BACKUP
+echo -e "\n-----Removing Files-------\n"
 
-echo "SOURCE_DIR_COPY"
-echo $SOURCE_DIR_COPY
-
-echo "DEST_DIR_COPY"
-echo $DEST_DIR_COPY
-
-# sh -c "aws s3 sync s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR_BACKUP:-./backup}/$(date +%Y-%m-%d:%H-%M) \
-#               --exclude '*' --include 'js/*' --include 'asset-manifest.json' \
-#               --include 'static/*' --include 'css/*' --include 'translations/*' \
-#               --profile s3-copy-rm-profile \
-#               --no-progress"
-
-# echo -e "\n-----Removing Files-------\n"
-
-# sh -c "aws s3 rm s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} --exclude '*' \
-#               --include 'js/*' --include 'static/*' --recursive \
-#               --profile s3-copy-rm-profile"
+sh -c "aws s3 rm s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} --exclude '*' \
+              --include 'js/*' --include 'static/*' --recursive \
+              --profile s3-copy-rm-profile"
 
 
-# echo -e "\n-----Copying Files-------\n"
+echo -e "\n-----Copying Files-------\n"
 
-# sh -c "aws s3 sync ${SOURCE_DIR_COPY:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR_COPY} \
-#               --profile s3-copy-rm-profile \
-#               --no-progress"
+sh -c "aws s3 sync ${SOURCE_DIR_COPY:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR_COPY} \
+              --profile s3-copy-rm-profile \
+              --no-progress"
 
 
 aws configure --profile s3-copy-rm-profile <<-EOF >/dev/null 2>&1
