@@ -34,16 +34,16 @@ EOF
 
 echo -e "\n-----Removing Files-------\n"
 
-sh -c "aws s3 rm s3://${AWS_S3_BUCKET}/${SOURCE_DIR:-.} --exclude '*' \
+sh -c "aws s3 rm s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} --exclude '*' \
               --include 'js/*' --include 'static/*' --recursive \
               --profile s3-copy-rm-profile"
+
 
 echo -e "\n-----Copying Files-------\n"
 
 sh -c "aws s3 sync ${SOURCE_DIR_COPY:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR_COPY} \
               --profile s3-copy-rm-profile \
               --no-progress"
-
 
 
 aws configure --profile s3-copy-rm-profile <<-EOF >/dev/null 2>&1
