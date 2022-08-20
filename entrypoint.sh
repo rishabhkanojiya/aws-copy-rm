@@ -36,7 +36,7 @@ echo -e "\n-----Removing Files-------\n"
 
 sh -c "aws s3 rm s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} --exclude '*' \
               --include 'js/*' --include 'static/*' --recursive \
-              --profile s3-copy-rm-profile"
+              --profile s3-copy-rm-profile $*"
 
 
 # echo -e "\n-----Copying Files-------\n"
