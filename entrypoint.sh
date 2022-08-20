@@ -37,7 +37,9 @@ sh -c "aws s3 sync s3://${AWS_S3_BUCKET}/${SOURCE_DIR_BACKUP:-.} s3://${AWS_S3_B
               --exclude '*' --include 'js/*' --include 'asset-manifest.json' \
               --include 'static/*' --include 'css/*' --include 'translations/*' \
               --profile s3-copy-rm-profile \
-              --no-progress"
+              --no-progress \
+              $*"
+              
 
 # echo -e "\n-----Removing Files-------\n"
 
